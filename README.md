@@ -8,7 +8,8 @@
 
 This project conducts several experiments on the public dataset, Fashion-Gen, which contains 260,480 training text-image pairs for training and 35,528 text-image pairs for inference. The M-ViLT model can directly process the original image and text without any feature engineering pre-processing of the data. However, it is necessary to sort out the storage form of the data to facilitate the dataloader of torch:
 
-Please download the reorganized dataset via runing `wget xxx` in your terminal.
+Please download the reorganized dataset via runing `wget https://internshipalgo.oss-cn-zhangjiakou.aliyuncs.com/guangyuan.shen/PVLT/data.tar` in your terminal.
+
 
 # Prelimilaries
 
