@@ -39,29 +39,14 @@ def train_one_epoch_vl(model: torch.nn.Module, criterion: DistillationLoss,
     print_freq = 10
     
     for idx, samples in enumerate(metric_logger.log_every(data_loader, print_freq, header)):
-        # define the blank dict
-        # bartMSS_input_dict = dict()
         # 加载数据样本
         images = samples['image'].to(device, non_blocking=True)   # [bs, 3, 256, 256]
-        # bert_input_ids = samples['input_ids'].to(device, non_blocking=True)    # [bs, 128]
-        # n_image = samples['n_image'].to(device, non_blocking=True)
-        # n_input_ids = samples['n_input_ids'].to(device, non_blocking=True)
-        # ori_input_ids = samples['ori_input_ids'].to(device, non_blocking=True) 
-        # attention_mask = samples[2].to(device, non_blocking=True)   # [bs, 128]
         mlm_labels = samples['mlm_labels'].to(device, non_blocking=True)   # [bs, 128]
         i2t_labels = samples['i2t_labels'].to(device, non_blocking=True)
         masked_images = samples['masked_images'].to(device, non_blocking=True)
-        # segment_ids = samples[4].to(device, non_blocking=True)  # [bs, 128]
         itm_labels = samples['itm_labels'].to(device, non_blocking=True)   # [bs, 1]
         sup_cls_labels = samples['sup_cls_labels'].to(device, non_blocking=True)
         sub_cls_labels = samples['sub_cls_labels'].to(device, non_blocking=True)
-        # t2i_labels = samples['t2i_labels'].to(device, non_blocking=True)
-        # bartMSS_input_dict.update(
-        #     input_ids=samples['bartMSS_input_dict']['input_ids'].to(device, non_blocking=True),
-        #     attention_mask=samples['bartMSS_input_dict']['attention_mask'].to(device, non_blocking=True),
-        #     decoder_input_ids=samples['bartMSS_input_dict']['decoder_input_ids'].to(device, non_blocking=True),
-        #     labels=samples['bartMSS_input_dict']['labels'].to(device, non_blocking=True)
-        #     )
         
         # 是否使用原始的input-id
         if USE_ORI_INPUT_IDS:
@@ -92,59 +77,6 @@ def train_one_epoch_vl(model: torch.nn.Module, criterion: DistillationLoss,
                 if args.loss_type['t2i'] == 1:
                     # text-to-image
                     outputs = model(masked_images, input_ids)
-                
-            # # forward model
-            # if args.loss_type['i2t'] == 0 and args.loss_type['t2i'] == 0:
-            #     if args.loss_type['itg'] == 1:
-            #         outputs = model(masked_images, input_ids)
-            #     else:
-            #         outputs = model(images, input_ids)
-            # elif args.loss_type['i2t'] == 1 and args.loss_type['t2i'] == 0:
-            #     # raise Exception('debug-70')
-            #     if idx % 2 == 0:
-            #         if args.loss_type['itg'] == 1:
-            #             outputs = model(masked_images, input_ids)
-            #         else:
-            #             outputs = model(images, input_ids)
-            #     elif idx % 2 == 1:
-            #         if args.loss_type['i2t'] == 1:
-            #             # image to text (generation)
-            #             # print('>>> DEBUG-I2T: ', input_images.shape, n_input_ids.shape)
-            #             outputs = model(images, n_input_ids)
-            # elif args.loss_type['i2t'] == 0 and args.loss_type['t2i'] == 1:
-            #     # raise Exception('debug-82')
-            #     if idx % 2 == 0:
-            #         if args.loss_type['itg'] == 1:
-            #             outputs = model(masked_images, input_ids)
-            #         else:
-            #             outputs = model(images, input_ids)
-            #     elif idx % 2 == 1:
-            #         if args.loss_type['t2i'] == 1:
-            #             # print('>>> DEBUG-T2I: ', n_image.shape, input_ids.shape)
-            #             # text to image (generation)
-            #             outputs = model(masked_images, input_ids)   # the image with random grid masking strategy
-            # else:
-            #     # raise Exception('debug-76')
-            #     if idx % 3 == 0:
-            #         # ITM task
-            #         # print('>>> DEBUG-MLM: ', input_images.shape, input_ids.shape)
-            #         # whether using itg task
-            #         if args.loss_type['itg'] == 1:
-            #             outputs = model(masked_images, input_ids)
-            #         else:
-            #             outputs = model(images, input_ids)
-            #     elif idx % 3 == 1:
-            #         if args.loss_type['t2i'] == 1:
-            #             # text to image (generation) -> it is optional
-            #             # t2i_input_ids = ori_input_ids.detach()
-            #             # t2i_input_ids[t2i_input_ids[:, :] == -1] = 0
-            #             # outputs = model(n_image, t2i_input_ids)
-            #             outputs = model(masked_images, input_ids)
-            #     elif idx % 3 == 2:
-            #         if args.loss_type['i2t'] == 1:
-            #             # image to text (generation)
-            #             # print('>>> DEBUG-I2T: ', input_images.shape, n_input_ids.shape)
-            #             outputs = model(images, n_input_ids)
             
             # calculate loss with different pre-training/down-streaming tasks
             if outputs['mlm_logits'] is not None:
@@ -154,48 +86,21 @@ def train_one_epoch_vl(model: torch.nn.Module, criterion: DistillationLoss,
 
                 # print('>>> Debug-MLMhead:', '\n\t', outputs['mlm_logits'].max(), outputs['mlm_logits'].min(), outputs['mlm_logits'].mean(), mlm_labels.max(), mlm_labels.min())
                 total_loss += loss_mlm
-
-            # if outputs['i2t_logits'] is not None:
-            #     # print('>>> Debug-mlm_logits: ', outputs['mlm_logits'].shape, outputs['mlm_logits'].view(-1, 30522).shape, mlm_labels.view(-1).shape) 
-            #     # -> [bs, 128, 30522], [16384, 30522], [16384]
-            #     loss_i2t = CrossEntropyLoss(ignore_index=-1)(outputs['i2t_logits'].view(-1, 30522), i2t_labels.view(-1))
-
-            #     # print('>>> Debug-MLMhead:', '\n\t', outputs['mlm_logits'].max(), outputs['mlm_logits'].min(), outputs['mlm_logits'].mean(), mlm_labels.max(), mlm_labels.min())
-            #     total_loss += loss_i2t
             
             if outputs['itm_logits'] is not None:
-                # print('>>> Debug-itm_logits: ', outputs['itm_logits'].shape, outputs['itm_logits'].view(-1, 2).shape, itm_labels.view(-1).shape)
-                # -> [bs, 1, 2], [bs, 2], [16384]
                 loss_itm = ITM_LOSS_WEIGHT * CrossEntropyLoss()(outputs['itm_logits'].view(-1, 2), itm_labels.view(-1))
                 total_loss += loss_itm
             
             if outputs['sup_cls_logits'] is not None:
-                # print('>>> Debug-itm_logits: ', outputs['itm_logits'].shape, outputs['itm_logits'].view(-1, 2).shape, itm_labels.view(-1).shape)
-                # -> [bs, 1, 2], [bs, 2], [16384]
-                # print('Debug-160:', outputs['sup_cls_logits'].shape, outputs['sub_cls_logits'].shape)
                 loss_sup_cls = CrossEntropyLoss()(outputs['sup_cls_logits'].view(-1, 48), sup_cls_labels.view(-1))
                 loss_sub_cls = CrossEntropyLoss()(outputs['sub_cls_logits'].view(-1, 122), sub_cls_labels.view(-1))
                 total_loss += loss_sup_cls
                 total_loss += loss_sub_cls
             
-            # if outputs['itg_logits'] is not None:
-            #     # # previous
-            #     loss_itg = 10 * SmoothL1Loss()(outputs['itg_logits'], images)
-            #     total_loss += loss_itg
-            
             if outputs['t2i_logits'] is not None:
-                # ts = outputs['t2i_logits'][0]
-                # ts_norm = (ts - ts.min()) / (ts.max()-ts.min() + 1e-8)
-                # loss_t2i = MSELoss()(ts_norm, images)
-                # # previous
-                # print('Debug167', ts_norm.max(), ts_norm.min(), images.max(), images.min())
 
                 loss_t2i = T2I_LOSS_WEIGHT * SmoothL1Loss()(outputs['t2i_logits'], images)
                 total_loss += loss_t2i
-            
-            # if outputs['bartMSS_logits'] is not None:
-            #     loss_bartMSS = CrossEntropyLoss(ignore_index=-1)(outputs['bartMSS_logits'].view(-1, 30522), bartMSS_input_dict['labels'].view(-1))
-            #     total_loss += loss_bartMSS
 
         # @get the scalar value of losses
         total_loss_value = total_loss.item()

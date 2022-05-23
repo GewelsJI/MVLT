@@ -268,8 +268,6 @@ def main(args):
         loss_type=args.loss_type,
         pretrained_pth=args.pretrain_pth,   # imagenet pvt pretrain
     )
-    
-    # self.electra_discriminator.apply(fix_bn)    # fix batchnorm [https://www.jb51.net/article/213395.htm]
 
     if args.finetune:
         if args.finetune.startswith('https'):
@@ -320,30 +318,6 @@ def main(args):
     else:
         criterion = torch.nn.CrossEntropyLoss()
 
-    # teacher_model = None
-    # if args.distillation_type != 'none':
-    #     assert args.teacher_path, 'need to specify teacher-path when using distillation'
-    #     print(f"Creating teacher model: {args.teacher_model}")
-    #     teacher_model = create_model(
-    #         args.teacher_model,
-    #         pretrained=False,
-    #         num_classes=args.nb_classes,
-    #         global_pool='avg',
-    #     )
-    #     if args.teacher_path.startswith('https'):
-    #         checkpoint = torch.hub.load_state_dict_from_url(
-    #             args.teacher_path, map_location='cpu', check_hash=True)
-    #     else:
-    #         checkpoint = torch.load(args.teacher_path, map_location='cpu')
-    #     teacher_model.load_state_dict(checkpoint['model'])
-    #     teacher_model.to(device)
-    #     teacher_model.eval()
-
-    # wrap the criterion in our custom DistillationLoss, which
-    # just dispatches to the original criterion if args.distillation_type is 'none'
-    # criterion = DistillationLoss(
-    #     criterion, teacher_model, args.distillation_type, args.distillation_alpha, args.distillation_tau
-    # )
     criterion = DistillationLoss(
         criterion, None, 'none', 0, 0
     )
