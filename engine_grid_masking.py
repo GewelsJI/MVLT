@@ -365,16 +365,16 @@ def evaluate_retrieval(data_loader, model, device, args):
             sorted_logits, sorted_indices = torch.sort(logits_softmax[:,1], dim=-1, descending=True)
             # print(sorted_logits, sorted_indices)
             
-            
-            os.makedirs('./visulization/{}/{}/'.format(save_header, '{}.txt'.format(_cur_i)), exist_ok=True)
-            tmp_1, tmp_2 = torch.sort(sorted_indices.data, dim=-1, descending=False)
-            # print(sorted_indices, type(sorted_indices.data), tmp_1, tmp_2)
-            with open('./visulization/{}/{}/ori-text-related.txt'.format(save_header, '{}.txt'.format(_cur_i)), 'w+') as fileobject:
-                fileobject.write('>>> >>> info_list <<< <<<\n' + str(info_list) + '\n\n')
-                fileobject.write('>>> >>> sorted_logits <<< <<<\n' + str(sorted_logits.data) + '\n\n')
-                fileobject.write('>>> >>> sorted_indices <<< <<<\n' + str(sorted_indices.data) + '\n\n')
-                for _i in tmp_2.tolist()[0:5]:
-                    fileobject.write('>>> >>> rank@5 ({}/5) <<< <<<\n'.format(_i) + str(info_list[_i]) + '\n\n')
+            # for visualization
+            # os.makedirs('./visulization/{}/{}/'.format(save_header, '{}.txt'.format(_cur_i)), exist_ok=True)
+            # tmp_1, tmp_2 = torch.sort(sorted_indices.data, dim=-1, descending=False)
+            # # print(sorted_indices, type(sorted_indices.data), tmp_1, tmp_2)
+            # with open('./visulization/{}/{}/ori-text-related.txt'.format(save_header, '{}.txt'.format(_cur_i)), 'w+') as fileobject:
+            #     fileobject.write('>>> >>> info_list <<< <<<\n' + str(info_list) + '\n\n')
+            #     fileobject.write('>>> >>> sorted_logits <<< <<<\n' + str(sorted_logits.data) + '\n\n')
+            #     fileobject.write('>>> >>> sorted_indices <<< <<<\n' + str(sorted_indices.data) + '\n\n')
+            #     for _i in tmp_2.tolist()[0:5]:
+            #         fileobject.write('>>> >>> rank@5 ({}/5) <<< <<<\n'.format(_i) + str(info_list[_i]) + '\n\n')
 
 
             index = np.argwhere(sorted_indices.cpu().numpy() == 0)

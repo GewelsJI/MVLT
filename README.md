@@ -13,9 +13,9 @@ Please download the reorganized dataset via runing `wget https://internshipalgo.
 
 # Prelimilaries
 
-Installing the basic libararies python3.6, pytorch1.7+, cuda10.1 on UBUNTU18.04. I did validate the flexibilty on other versions of libraries and systems, but I think it is easy to adaptation with minor changes. 
+Installing the basic libararies python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. I did validate the flexibilty on other versions of libraries and systems, but I think it is easy to adaptation with minor changes. 
 - Create env via `conda create -n MVLT python=3.6`
-- Installing Pytorch via `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html`
+- Installing Pytorch via `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
 - Installing the auxiliary libraries via running `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install -r requirements.txt`
 
 # Inference
@@ -23,9 +23,7 @@ Installing the basic libararies python3.6, pytorch1.7+, cuda10.1 on UBUNTU18.04.
 - Downstream retrieval tasks
   - We provide the zero-shot retrieval performance without any finetuning process, and thus, the well-trained weight could be directly used in the retrieval tasks
   - Please download the pre-trained weight via runing `wget xxx` and move it into `./checkpoints/mvlt/`
-  - Just run `bash downstream_retrieval.sh` and then get the prediction result like this:
-    - Image-Text Retrieval (ITR): `>>> retrieval ITR: acc@1: 0.331, acc@5: 0.772, acc@10: 0.911`
-    - Text-Image Retrieval (TIR): `>>> retrieval TIR: acc@1: 0.346, acc@5: 0.78, acc@10: 0.895`
+  - Just run `bash downstream_retrieval.sh` and then get the prediction results of Image-Text Retrieval (ITR) and Text-Image Retrieval (TIR).
 
 - Downstream recognition tasks
   - This task needs the fine-tuning process because our pre-trained model is not equipped with the classification head.
