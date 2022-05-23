@@ -8,7 +8,7 @@ from timm.models.registry import register_model
 from timm.models.vision_transformer import _cfg
 
 from transformers.models.bert.modeling_bert import BertConfig, BertEmbeddings, BertModel
-from transformers.models.reformer.modeling_reformer import ReformerConfig, ReformerModel
+# from transformers.models.reformer.modeling_reformer import ReformerConfig, ReformerModel
 
 from transformers import (
                 BartConfig,
@@ -358,11 +358,6 @@ class PyramidVisionLanguageTransformer(nn.Module):
     def forward(self, input_images, input_ids):
         logits_dict = dict()
 
-        # if self.loss_type['bartMSS'] == 1:
-        #     img_feats, text_feats = self.forward_pyramid_features_vl(input_images, bartMSS_input_dict['input_ids'])
-        # else:
-        #     # get image/text features from PVLT
-        #     img_feats, text_feats = self.forward_pyramid_features_vl(input_images, input_ids)
         # get image/text features from PVLT
         img_feats, text_feats = self.forward_pyramid_features_vl(input_images, input_ids)
 
@@ -375,14 +370,6 @@ class PyramidVisionLanguageTransformer(nn.Module):
             logits_dict.update(mlm_logits=mlm_logits)
         else:
             logits_dict.update(mlm_logits=None)
-        
-        # if self.loss_type['i2t']:
-        #     # define pre-training tasks: image-2-text
-        #     i2t_feat = self.i2t_head_embed(text_feats[-1])
-        #     i2t_logits = self.i2t_head(i2t_feat)    # bs, 128, 30522
-        #     logits_dict.update(i2t_logits=i2t_logits)
-        # else:
-        #     logits_dict.update(i2t_logits=None)
 
         if self.loss_type['itm']:
             itm_feat = self.itm_head_embed(text_feats[-1][:, 0:1, :])

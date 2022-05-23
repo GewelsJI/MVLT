@@ -75,15 +75,8 @@ class FashionGenDatasetPreTrain(data.Dataset):
             print('>>> load FashionGenDataset < Pre-Training > valid phase')
             image_root = os.path.join(root, 'extracted_valid_images')
             text_info_root = os.path.join(root, 'full_valid_info_PAI')
-            noisy_image_root = os.path.join(root, 'generated_valid_noise_images')
-            noisy_text_root = os.path.join(root, 'generated_valid_noise_texts')
-            # if self.mask_strategy == 'random_grid':
-            #     if self.trainsize == 256:
-            #         masking_image_root = os.path.join(root, 'generated_valid_masking{:.2f}_size{}_images'.format(self.mask_ratio, self.mask_patch_size))
-            #     else:
-            #         masking_image_root = os.path.join(root, 'generated_valid_masking{:.2f}_size{}_img{}_images'.format(self.mask_ratio, self.mask_patch_size, self.trainsize))
-            # else:
-            #     masking_image_root = os.path.join(root, 'generated_valid_noise_images')
+            # noisy_image_root = os.path.join(root, 'generated_valid_noise_images')
+            # noisy_text_root = os.path.join(root, 'generated_valid_noise_texts')
             
             if self.mask_strategy == 'random_grid':
                 masking_image_root = os.path.join(root, 'generated_valid_masking{:.2f}_size{}_images'.format(self.mask_ratio, self.mask_patch_size))
@@ -185,24 +178,6 @@ class FashionGenDatasetPreTrain(data.Dataset):
 
         # process text data
         input_ids, attention_mask, mlm_labels, segment_ids, ori_input_ids, i2t_labels, bartMSS_input_dict = self.text_process(prod_caption=text_dict['captions'], max_token_length=self.max_token_length)
-
-        # # get noisy data for generation
-        # if self.dataset_type == 'train':
-        #     img_arr = np.random.randint(0, 256, (self.trainsize, self.trainsize, 3)).astype('uint8')
-        #     n_image = Image.fromarray(img_arr).convert('RGB')
-        #     n_image = self.img_transform(n_image)
-
-        #     text_arr = np.random.randint(0, 30522, (self.max_token_length, 1))
-        #     n_input_ids = torch.from_numpy(text_arr).long().squeeze()
-        # elif self.dataset_type == 'valid':
-        #     n_image = self.rgb_loader(self.noisy_images[index])
-        #     n_image = self.img_transform(n_image)
-
-        #     text_arr = self.pkl_loader(self.noisy_texts[index])
-        #     n_input_ids = torch.from_numpy(text_arr).long().squeeze()   # Daniel
-        #     # n_input_ids = None
-        # else:
-        #     raise Exception('No type named {}'.format(self.dataset_type))
 
         # get some data infos for debugging
         # print('>>> Debug-L129:', input_ids, attention_mask, mlm_labels, segment_ids)
@@ -850,65 +825,6 @@ def get_args_parser():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser('DeiT training and evaluation script', parents=[get_args_parser()])
     args = parser.parse_args()
-
-    # train_loader = data.DataLoader(
-    #     dataset=FashionGenDatasetPreTrain(
-    #         root=args.data_path, 
-    #         data_type='valid', # 'train'
-    #         is_train=False, # True
-    #         args=args),
-    #     batch_size=1,
-    #     shuffle=False,
-    #     num_workers=1,
-    #     pin_memory=True,
-    #     drop_last=False)
-
-        
-    # for i, item_dict in enumerate(train_loader, start=1):
-    #     # @Danil: watch the shape of each variables
-    #     print(
-    #         i, item_dict['image'].shape, item_dict['input_ids'].shape, item_dict['attention_mask'].shape, item_dict['mlm_labels'].shape, 
-    #         item_dict['bartMSS_input_dict']['input_ids'].shape, item_dict['bartMSS_input_dict']['attention_mask'].shape, item_dict['bartMSS_input_dict']['decoder_input_ids'].shape,
-    #         item_dict['bartMSS_input_dict']['labels'].shape
-    #     )
-        
-    #     # @Danil: watch the exact value of each variables 
-    #     print(
-    #         '>>> image\n', item_dict['image'].shape, '\n>>>', item_dict['image'], '\n>>>', 
-    #     '>>> input_ids\n', item_dict['input_ids'].shape, '\n>>>', item_dict['input_ids'], '\n>>>',
-    #     '>>> n_input_ids\n', item_dict['n_input_ids'].shape, '\n>>>', item_dict['n_input_ids'], '\n>>>',
-    #     '>>> ori_input_ids\n', item_dict['ori_input_ids'].shape, '\n>>>', item_dict['ori_input_ids'], '\n>>>', 
-    #     '>>> attention_mask\n', item_dict['attention_mask'].shape, '\n>>>', item_dict['attention_mask'],
-    #     '>>> mlm_labels\n', item_dict['mlm_labels'].shape, '\n>>>', item_dict['mlm_labels'],
-    #     '>>> i2t_labels\n', item_dict['i2t_labels'].shape, '\n>>>', item_dict['i2t_labels'])
-    #     print('>>> bartMSS_input_dict-input_ids\n', item_dict['bartMSS_input_dict']['input_ids'].shape, '\n>>>', item_dict['bartMSS_input_dict']['input_ids'], '\n>>>', 
-    #     '>>> bartMSS_input_dict-attention_mask\n', item_dict['bartMSS_input_dict']['attention_mask'].shape, '\n>>>', item_dict['bartMSS_input_dict']['attention_mask'], '\n>>>', 
-    #     '>>> bartMSS_input_dict-decoder_input_ids\n', item_dict['bartMSS_input_dict']['decoder_input_ids'].shape, '\n>>>', item_dict['bartMSS_input_dict']['decoder_input_ids'], '\n>>>',
-    #     '>>> bartMSS_input_dict-labels\n', item_dict['bartMSS_input_dict']['labels'].shape, '\n>>>', item_dict['bartMSS_input_dict']['labels'], '\n>>>')
-    #     print('#'*30)
-
-        # import torchvision.transforms as transforms
-        # img = transforms.ToPILImage()(item_dict['masked_images'].squeeze())
-        # save_pth = './bak_for_debug_1207/'
-        # os.makedirs(save_pth, exist_ok=True)
-        # img.save(save_pth+item_dict['data_info']['img_name'][0])
-        # pass
-
-    # retrieval_loader = data.DataLoader(
-    #     dataset=FashionGenDatasetDownstream_Retrieval(root=args.data_path, args=args),
-    #     batch_size=1,
-    #     shuffle=False,
-    #     num_workers=1,
-    #     pin_memory=True,
-    #     drop_last=False)
-
-    # for i, item_dict in enumerate(retrieval_loader, start=1):
-    #     # @Danil: watch the exact value of each variables (retrieval-itr)
-    #     print(
-    #         '>>> ori_input_ids_101\n', item_dict['ori_input_ids_101'].shape, '\n>>>', item_dict['ori_input_ids_101'][0],
-    #         '>>> images_101\n', item_dict['images_101'].shape, '\n>>>', item_dict['images_101'][0],
-    #         # '>>> info_list\n', item_dict['info_list'], '\n>>>', item_dict['info_list'][0],
-    #     )
 
     recognition_loader = data.DataLoader(
         dataset=FashionGenDatasetDownstream_Recognition(root=args.data_path, args=args),

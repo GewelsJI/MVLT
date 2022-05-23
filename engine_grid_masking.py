@@ -20,7 +20,6 @@ from libs import utils
 from libs.vl_scores import compute_score_with_logits, compute_mlm_score, compute_psnr
 from sklearn.metrics import f1_score, accuracy_score, roc_curve, auc, precision_score, recall_score
 
-# 设置损失函数的占比（经验值，后续考虑改进？）
 MLM_LOSS_WEIGHT, ITM_LOSS_WEIGHT, T2I_LOSS_WEIGHT = 1, 1, 10
 USE_ORI_INPUT_IDS = False
 
