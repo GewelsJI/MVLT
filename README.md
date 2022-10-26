@@ -35,7 +35,7 @@ Installing the basic libararies python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. 
     @article{ji2022masked,
       title={Masked Vision-Language Transformer in Fashion},
       author={Ji, Ge-Peng and Zhuge, Mingchen and Gao, Dehong and Fan, Deng-Ping and Sakaridis, Christos and Van Gool, Luc},
-      journal={arXiv preprint arXiv:xxxx},
+      journal={Machine Intelligence Research},
       year={2022}
     }
 
