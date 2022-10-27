@@ -33,14 +33,12 @@ Installing the basic libararies python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. 
 - Downstream retrieval tasks
   - We provide the zero-shot retrieval performance without any finetuning process, and thus, the well-trained weight could be directly used in the retrieval tasks.
   - Just run `bash downstream_retrieval.sh` and then get the prediction results of Image-Text Retrieval (ITR) and Text-Image Retrieval (TIR).
-  - And you will get the following numerical results:
     - Text-Image Retrieval (TIR): acc@1: 0.346, acc@5: 0.780, acc@10: 0.895
     - Image-Text Retrieval (ITR): acc@1: 0.331, acc@5: 0.772, acc@10: 0.911
 
 - Downstream recognition tasks
   - This task needs the fine-tuning process because our pre-trained model is not equipped with the classification head.
   - Just run `bash downstream_recognition.sh` and then get the prediction results of Main-Category Recognition (M-CR) and Sub-Category Recognition (S-CR).
-  - And you will get the following numerical results:
     - Main-category recognition (M-CR): accuracy (0.9825996064928677) macro_f1 (0.8954719842489123) 
     - Sub-category recognition (S-CR): accuracy (0.9356554353172651) macro_f1 (0.8285927576055913) 
 
