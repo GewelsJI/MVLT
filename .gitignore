@@ -7,3 +7,4 @@ backup_new/
 libs/__pycache__/
 __pycache__/
 visulization/
+test.py
