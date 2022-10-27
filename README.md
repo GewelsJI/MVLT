@@ -3,7 +3,8 @@
 - Authors: Ge-Peng Ji^, Mingcheng Zhuge^, Dehong Gao, Deng-Ping Fan#, Christos Sakaridis, and Luc Van Gool
 - Accepted by  Machine Intelligence Research 2023
 - Link: [arXiv Paper]() (coming soon)
-- This project is still work in progress, and we invite all to contribute in making it more acessible and useful. If you have any questions, please feel free to drop us an e-mail (gepengai.ji@gmail.com & mczhuge@gmail.com & dengpfan@gmail.com) or directly report it in the issue or push a PR. Your star is our motivation, let's enjoy it!
+- This project is still work in progress, and we invite all to contribute in making it more acessible and useful. If you have any questions, please feel free to drop us an e-mail (gepengai.ji@gmail.com & mczhuge@gmail.com & dengpfan@gmail.com) or directly report it in the issue or push a PR. 
+- Your star is our motivation, let's enjoy it!
 
 
 # Dataset Preparation
