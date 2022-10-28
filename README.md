@@ -20,7 +20,7 @@ Installing the basic libararies python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. 
 - Create env via `conda create -n MVLT python=3.6`
 - Installing Pytorch via `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
 - Installing the auxiliary libraries via running `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install -r requirements.txt`
-- Downloading the checkpoint of PVT-tiny for pre-training.
+- Downloading the checkpoint of PVT-tiny for pre-training. (You can also try other PVT-v1 and PVT-v2 variants to further boost the performance if enough GPU memory is available for you.)
 - Downloading the checkpoint from [OneDrive](https://anu365-my.sharepoint.com/:u:/g/personal/u7248002_anu_edu_au/EYNQkZ-m01FJrNKQAiKkVLcBg2qvM6EHeJ_I20X7DJ4D8A?e=AEjQXJ) and move them into `./checkpoints/`. Note this tar.gz file contains two weights: `checkpoint_retrieval.pth` and `checkpoint_recognition.pth`.
 
 # Training
