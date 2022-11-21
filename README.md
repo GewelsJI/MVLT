@@ -57,7 +57,7 @@ Here are two concurrent works from Alibaba ICBU Team.
     @inproceedings{zhuge2021kaleido,
       title={Kaleido-bert: Vision-language pre-training on fashion domain},
       author={Zhuge, Mingchen and Gao, Dehong and Fan, Deng-Ping and Jin, Linbo and Chen, Ben and Zhou, Haoming and Qiu, Minghui and Shao, Ling},
-      booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+      booktitle={CVPR},
       pages={12647--12657},
       year={2021}
     }
