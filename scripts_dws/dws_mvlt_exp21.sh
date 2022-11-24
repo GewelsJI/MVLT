@@ -1,7 +1,7 @@
 cd ..
 export NCCL_LL_THRESHOLD=0
 
-_CONFIG='dws_pvlt_exp21'
+_CONFIG='dws_mvlt_exp21'
 _PORT=10007
 
 mkdir -p ./checkpoints/${_CONFIG}/
