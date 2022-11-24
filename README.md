@@ -29,9 +29,9 @@ Installing the basic libararies python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. 
 
 > Please note that we only use PVT-Tiny to learn multi-modal features, and other stronger backbone would further improve representation abilities, such as SwinTransformer or PVTv2.
 
-- Please revise your data path (`--data-path` parameter) in `./scripts_pt_dws/dws_mvlt_exp21.sh` or `./scripts_pt_dws/dws_mvlt_ft_exp48.sh`
-- Just run `bash ./scripts_pt_dws/dws_mvlt_exp21.sh` for pre-training
-- Just run `bash ./scripts_pt_dws/dws_mvlt_ft_exp48.sh` for fine-tuning
+- Please revise your data path (`--data-path` parameter) in `./scripts_dws/dws_mvlt_exp21.sh` or `./scripts_dws/dws_mvlt_ft_exp48.sh`
+- Just run `bash ./scripts_dws/dws_mvlt_exp21.sh` for pre-training
+- Just run `bash ./scripts_dws/dws_mvlt_ft_exp48.sh` for fine-tuning
 
 # Inference
 
