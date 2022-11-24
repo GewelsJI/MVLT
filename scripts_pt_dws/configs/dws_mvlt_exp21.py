@@ -1,0 +1,19 @@
+cfg = dict(
+    model='pvlt_tiny',
+    pretrain_pth='./preweights/pvt_v1/pvt_tiny.pth',    # for evaluation
+    drop_path=0.1,
+    clip_grad=None,
+    output_dir='./checkpoints/dsw_mvlt_exp21',  # for training and evaluation
+    data_set='FashionGen',
+    mixup=0,
+    cutmix=0,
+    input_size=256,
+    loss_type={'itm':1, 'mlm':1, 't2i':1, 'cls':0},
+    batch_size=150,
+    epochs=150,
+    lr=2.5e-4,
+    weight_decay=0.01,
+    mask_ratio=0.50, # refer to Simple Masked Image Modeling
+    mask_strategy='random_grid',
+    mask_patch_size=16,
+)

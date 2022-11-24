@@ -8,3 +8,4 @@ libs/__pycache__/
 __pycache__/
 visulization/
 test.py
+.backup/
