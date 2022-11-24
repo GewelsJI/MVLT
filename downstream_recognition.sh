@@ -1,8 +1,6 @@
 export NCCL_LL_THRESHOLD=0
-EXP_ID='pai_mvlt_ft_exp48'
+EXP_ID='dsw_mvlt_ft_exp48'
 
-# # >>> runtime: remote-pai
-# EXP_ID='pai_pvlt_ft_48'
 CUDA_VISIBLE_DEVICES=3,4 ~/miniconda3/envs/MVLT/bin/python3.6 -m torch.distributed.launch --nproc_per_node=2 \
     --master_port=10041 \
     --use_env main_vl.py \
