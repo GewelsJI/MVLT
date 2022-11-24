@@ -15,5 +15,5 @@ CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch \
     --master_port=${_PORT} \
     --use_env main_vl.py \
     --config scripts_dws/configs/${_CONFIG}.py \
-    --data-path /home/admin/workspace/daniel_ji/dataset/Fashion-Gen \
+    --data-path ./Fashion-Gen-Processed \
     --runtime dws

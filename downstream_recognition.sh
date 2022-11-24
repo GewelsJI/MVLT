@@ -5,7 +5,7 @@ CUDA_VISIBLE_DEVICES=3,4 ~/miniconda3/envs/MVLT/bin/python3.6 -m torch.distribut
     --master_port=10041 \
     --use_env main_vl.py \
     --config scripts_pt_dws/configs/${EXP_ID}.py \
-    --data-path /data/users/jigepeng/Dataset/Fashion-Gen-Processed \
+    --data-path ./Fashion-Gen-Processed \
     --resume checkpoints/${EXP_ID}/checkpoint_recognition.pth \
     --eval-recognition \
     --runtime dws
