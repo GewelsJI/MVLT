@@ -3,7 +3,7 @@
 - Authors: Ge-Peng Ji^, Mingcheng Zhuge^, Dehong Gao, Deng-Ping Fan#, Christos Sakaridis, and Luc Van Gool
 - Accepted by  Machine Intelligence Research 2023
 - Link: [arXiv Paper](https://arxiv.org/abs/2210.15110) 
-- This project is still work in progress, and we invite all to contribute in making it more acessible and useful. If you have any questions, please feel free to drop us an e-mail (gepengai.ji@gmail.com & mczhuge@gmail.com & dengpfan@gmail.com) or directly report it in the issue or push a PR. 
+- This project is still working in progress, and we invite all to contribute in making it more accessible and useful. If you have any questions, please feel free to drop us an e-mail (gepengai.ji@gmail.com & mczhuge@gmail.com & dengpfan@gmail.com) or directly report it in the issue or push a PR. 
 - Your star is our motivation, let's enjoy it!
 - Welcome to our WeChat Group ([QR Code](https://github.com/GewelsJI/MVLT/blob/main/assets/wechat_qr_code.JPG))
 
@@ -17,7 +17,7 @@ Please download the reorganized dataset from [OneDrive](https://anu365-my.sharep
 
 # Prelimilaries
 
-Installing the basic libraries python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. I did validate the flexibilty on other versions of libraries and systems, but I think it is easy to adaptation with minor changes. 
+Installing the basic libraries python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. I did validate the flexibility on other versions of libraries and systems, but I think it is easy to adapt with minor changes. 
 - Create env via `conda create -n MVLT python=3.6`
 - Installing Pytorch via `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
 - Installing the auxiliary libraries via running `~/miniconda3/envs/MVLT/bin/python3.6 -m pip install -r requirements.txt`
@@ -80,5 +80,4 @@ Here are two concurrent works from Alibaba ICBU Team.
     }
 
 # Acknowlegement
-
-Thanks Alibaba ICBU Search Team and Wenhai Wang ([PVT](https://github.com/whai362/PVT)) for their technical support.
+Thanks, Alibaba ICBU Search Team and Wenhai Wang ([PVT](https://github.com/whai362/PVT)) for their technical support.
