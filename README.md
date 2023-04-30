@@ -50,11 +50,11 @@ Installing the basic libraries python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. I
 
 # Citation
 
-    @article{ji2022masked,
+    @article{ji2023masked,
       title={Masked Vision-Language Transformer in Fashion},
       author={Ji, Ge-Peng and Zhuge, Mingchen and Gao, Dehong and Fan, Deng-Ping and Sakaridis, Christos and Van Gool, Luc},
       journal={Machine Intelligence Research},
-      year={2022}
+      year={2023}
     }
 
 Here are two concurrent works from Alibaba ICBU Team.
