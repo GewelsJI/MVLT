@@ -42,7 +42,7 @@ class FashionGenDatasetPreTrain(data.Dataset):
     """
     # def __init__(self, root, trainsize, data_type, if_itm, if_itg, mask_ratio, mask_strategy, max_token_length=128, word_mask_rate=0.15, is_train=True):
     def __init__(self, root, data_type, is_train=True, args=None):
-        # pre-defination
+        # pre-definition
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.trainsize = args.input_size
         self.is_train = is_train
