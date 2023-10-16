@@ -15,7 +15,7 @@ This project conducts several experiments on the public dataset, Fashion-Gen, wh
 Please download the reorganized dataset from [Google Drive (9.72GB)](https://drive.google.com/file/d/1xMJi0BSRO_f-upWT5Z856Ho3B3sCAilr/view?usp=sharing).
 
 
-# Prelimilaries
+# Preliminaries
 
 Installing the basic libraries python3.6, pytorch1.8, cuda10.1 on UBUNTU18.04. I did validate the flexibility on other versions of libraries and systems, but I think it is easy to adapt with minor changes. 
 - Create env via `conda create -n MVLT python=3.6`
