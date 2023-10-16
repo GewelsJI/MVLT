@@ -240,7 +240,7 @@ class PyramidVisionLanguageTransformer(nn.Module):
             }
         
         if self.loss_type['mlm'] == 1:
-            print('>>> using masked languaged modeling (mlm) head')
+            print('>>> using masked language modeling (mlm) head')
             self.mlm_head_embed = nn.Sequential(
                 nn.Linear(in_features=embed_dims[-1], 
                           out_features=token_hidden_size),
@@ -449,7 +449,7 @@ def pvlt_small(pretrained, token_hidden_size, num_text_tokens, loss_type, pretra
 
 @register_model
 def pvlt_medium(pretrained, token_hidden_size, num_text_tokens, loss_type, pretrained_pth, **kwargs):
-    print('>>> current model: PVLT-Tiny')
+    print('>>> current model: PVLT-Medium')
     model = PyramidVisionLanguageTransformer(
         patch_size=4, embed_dims=[64, 128, 320, 512], num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
         norm_layer=partial(nn.LayerNorm, eps=1e-6), depths=[3, 4, 18, 3], sr_ratios=[8, 4, 2, 1],
@@ -467,7 +467,7 @@ def pvlt_medium(pretrained, token_hidden_size, num_text_tokens, loss_type, pretr
 
 @register_model
 def pvlt_large(pretrained, token_hidden_size, num_text_tokens, loss_type, pretrained_pth, **kwargs):
-    print('>>> current model: PVLT-Tiny')
+    print('>>> current model: PVLT-Large')
     model = PyramidVisionLanguageTransformer(
         patch_size=4, embed_dims=[64, 128, 320, 512], num_heads=[1, 2, 5, 8], mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
         norm_layer=partial(nn.LayerNorm, eps=1e-6), depths=[3, 8, 27, 3], sr_ratios=[8, 4, 2, 1],
