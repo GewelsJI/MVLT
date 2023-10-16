@@ -393,7 +393,7 @@ def main(args):
             pin_memory=args.pin_mem,
             drop_last=False
         )
-        print('\n', '*'*40, '\n', '>>> only use visulization <<<\n', '*'*40, '\n')
+        print('\n', '*'*40, '\n', '>>> only use visualization <<<\n', '*'*40, '\n')
         test_stats = visual_vl(data_loader_viz, model, device, args)
         print(f">>> accuracy of the network on the {len(dataset_val)} test image-text pairs: mlm_acc={test_stats['mlm_acc']:.5f}% itm_acc={test_stats['itm_acc']:.5f}%")
         return
@@ -494,7 +494,7 @@ def main(args):
                     print('>>> successfully find total_cur_score: {} and save model on {}'.format(total_cur_score, checkpoint_path))
                     total_max_score = total_cur_score
                 else:
-                    print('>>> current score ({}) does not surpass the best one ({}), continue the nex training'.format(total_cur_score, total_max_score))
+                    print('>>> current score ({}) does not surpass the best one ({}), continue the next training'.format(total_cur_score, total_max_score))
                     pass
 
             if args.output_dir and utils.is_main_process():
