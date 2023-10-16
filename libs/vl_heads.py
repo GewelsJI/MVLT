@@ -146,7 +146,7 @@ class ITGHead(nn.Module):
 
     @staticmethod
     def ConvBN(in_planes, out_planes, kernel_size, stride=1, padding=0, dilation=1):
-        # Initialize Basic Convlutional Block and BN layer
+        # Initialize Basic Convolutional Block and BN layer
         return nn.Sequential(nn.Conv2d(in_planes, out_planes, kernel_size=kernel_size,
                                        stride=stride, padding=padding, dilation=dilation, bias=False),
                              nn.BatchNorm2d(out_planes))
